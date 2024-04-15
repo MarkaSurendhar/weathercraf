@@ -5,12 +5,13 @@
         justify-content: center;
         align-items: center;
         height: calc(100vh - 200px); /* Adjust height to leave 100px gap on all sides */
-        margin: 25px; /* Add 100px margin to all sides */
+       background-image: none;
+       background-color: none;
     }
 
     .container {
         width: 90%; /* Adjust width for better centering */
-        max-width: 320px; /* Limit maximum width for smaller mobile screens */
+        max-width: 380px; /* Limit maximum width for smaller mobile screens */
         padding: 10px; /* Add smaller padding on all sides */
         border-radius: 12px;
         background-image: linear-gradient(180deg, rgb(87, 183, 231), rgb(112, 99, 252));
