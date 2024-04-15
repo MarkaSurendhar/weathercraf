@@ -1,20 +1,32 @@
 
-section{
+section {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    /* background-color: rgb(228, 251, 229); */
+    background-image: linear-gradient(to bottom, #a6c0fe, #f68084);
 }
 
-.container{
+
+.container {
     width: 607px;
-    height: 650px;
+    height: auto; /* Change height to auto */
+    min-height: 250px; /* Set a minimum height */
     margin: auto;
-    margin-top:25px;
+    margin-top: 25px;
     border-radius: 12px;
-    background-image: linear-gradient(180deg,rgb(87, 183, 231),rgb(112, 99, 252));
+    background-image: linear-gradient(180deg, rgb(87, 183, 231), rgb(112, 99, 252));
+    transition: height 0.5s ease; /* Add transition for smoother height change */
 }
+
+.minimized {
+    height: 50px; /* Adjust height as needed */
+}
+
+.expanded {
+    height: 650px; /* Adjust height as needed */
+}
+
 .top-bar{
     display: flex;
     justify-content: center;
@@ -102,4 +114,20 @@ font-weight: bold;
 }
 .icon{
 margin-top: 10px;
+}
+.error {
+    color: rgb(239, 92, 51);
+    font-size: 24px;
+    margin-top: 25px;
+    margin-left: -40px;
+}
+
+.loading {
+    color: #f7f4f4;
+    font-size: 25px;
+    margin-top: 100px;
+}
+
+.minimized {
+    height: 50px; /* Adjust height as needed */
 }
