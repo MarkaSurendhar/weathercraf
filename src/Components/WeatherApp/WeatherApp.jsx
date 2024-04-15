@@ -1,6 +1,4 @@
-
-
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./WeatherApp.css";
 import search_icon from "../Assets/search.png";
 import clear_icon from "../Assets/clear.png";
@@ -11,85 +9,90 @@ import snow_icon from "../Assets/snow.png";
 import wind_icon from "../Assets/wind.png";
 import humidity_icon from "../Assets/humidity.png";
 
-const WeatherApp=()=>{
+const WeatherApp = () => {
+    let api_Key = "423a4c9e45476286c7d3554fb38edd02";
 
-    let api_Key="423a4c9e45476286c7d3554fb38edd02";
+    const[wicon, setWicon] = useState(cloud_icon);
+    const cityInputRef = useRef("");
 
-    const[wicon,setWicon]=useState(cloud_icon);
-
-    const search=async ()=>{
-        const element=document.getElementsByClassName("cityInput");
-        if(element[0].value===""){
-            return 0;
+    const search = async () => {
+        if (cityInputRef.current.value === "") {
+            return;
         }
-        let url=`https://api.openweathermap.org/data/2.5/weather?q=${element[0].value}&units=Metric&appid=${api_Key}`;
 
-        let response=await fetch(url);
-        let data= await response.json();
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityInputRef.current.value}&units=Metric&appid=${api_Key}`;
 
-        const humidity=document.getElementsByClassName("humidity-percent");
+        let response = await fetch(url);
+        let data = await response.json();
+
+        const humidity = document.getElementsByClassName("humidity-percent");
         const wind = document.getElementsByClassName("wind-rate");
-        const temperature=document.getElementsByClassName("weather-temp");
+        const temperature = document.getElementsByClassName("weather-temp");
         const location = document.getElementsByClassName("weather-location");
 
-        humidity[0].innerHTML=Math.floor(data.main.humidity)+" %";
-        wind[0].innerHTML=Math.floor(data.wind.speed)+" km/h";
-        temperature[0].innerHTML=Math.floor(data.main.temp)+" °C";
-        location[0].innerHTML=data.name;
+        humidity[0].innerHTML = Math.floor(data.main.humidity) + " %";
+        wind[0].innerHTML = Math.floor(data.wind.speed) + " km/h";
+        temperature[0].innerHTML = Math.floor(data.main.temp) + " °C";
+        location[0].innerHTML = data.name;
 
-        if(data.weather[0].icon==="01d" || data.weather[0].icon==="01n"){
+        if (data.weather[0].icon === "01d" || data.weather[0].icon === "01n") {
             setWicon(clear_icon);
-        }else if(data.weather[0].icon==="02d" || data.weather[0].icon==="02n"){
+        } else if (data.weather[0].icon === "02d" || data.weather[0].icon === "02n") {
             setWicon(cloud_icon);
-        }else if(data.weather[0].icon==="03d" || data.weather[0].icon==="03n"){
+        } else if (data.weather[0].icon === "03d" || data.weather[0].icon === "03n") {
             setWicon(drizzle_icon);
-
-        }else if(data.weather[0].icon==="04d" || data.weather[0].icon==="04n"){
+        } else if (data.weather[0].icon === "04d" || data.weather[0].icon === "04n") {
             setWicon(cloud_icon);
-        }else if(data.weather[0].icon==="09d" || data.weather[0].icon==="09n"){
+        } else if (data.weather[0].icon === "09d" || data.weather[0].icon === "09n") {
             setWicon(rain_icon);
-        }else if(data.weather[0].icon==="10d" || data.weather[0].icon==="10n"){
+        } else if (data.weather[0].icon === "10d" || data.weather[0].icon === "10n") {
             setWicon(rain_icon);
-        }else if(data.weather[0].icon==="13d" || data.weather[0].icon==="13n"){
+        } else if (data.weather[0].icon === "13d" || data.weather[0].icon === "13n") {
             setWicon(snow_icon);
-
-        }else{
+        } else {
             setWicon(clear_icon);
         }
 
+        // Clear input field after search
+        cityInputRef.current.value = "";
     }
 
-    return(
-<section>
-        <div className="container">
-            <div className="top-bar">
-                <input type="text" className="cityInput" placeholder="search for city"/>
-                <div className="search-icon" onClick={()=>{search()}}>
-                   <img src={search_icon} alt="" /> 
-                </div>
-            </div>
-            <div className="weather-image">
-                <img src={wicon} alt="" />
-            </div>
-            <div className="weather-temp"></div>
-            <div className="weather-location"></div>
-            <div className="data-container">
-                <div className="element">
-                    <img src={humidity_icon} alt="" className="icon" />
-                    <div className="data">
-                        <div className="humidity-percent"></div>
-                        <div className="text">Humidity</div>
+    return (
+        <section>
+            <div className="container">
+                <div className="top-bar">
+                    <input 
+                        type="text" 
+                        className="cityInput" 
+                        placeholder="search for city" 
+                        ref={cityInputRef} 
+                    />
+                    <div className="search-icon" onClick={search}>
+                        <img src={search_icon} alt="" />
                     </div>
                 </div>
-                <div className="element">
-                    <img src={wind_icon} alt="" className="icon" />
-                    <div className="data">
-                        <div className="wind-rate"></div>
-                        <div className="text">Wind Speed</div>
+                <div className="weather-image">
+                    <img src={wicon} alt="" />
+                </div>
+                <div className="weather-temp"></div>
+                <div className="weather-location"></div>
+                <div className="data-container">
+                    <div className="element">
+                        <img src={humidity_icon} alt="" className="icon" />
+                        <div className="data">
+                            <div className="humidity-percent"></div>
+                            <div className="text">Humidity</div>
+                        </div>
+                    </div>
+                    <div className="element">
+                        <img src={wind_icon} alt="" className="icon" />
+                        <div className="data">
+                            <div className="wind-rate"></div>
+                            <div className="text">Wind Speed</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </section>
     )
 }
