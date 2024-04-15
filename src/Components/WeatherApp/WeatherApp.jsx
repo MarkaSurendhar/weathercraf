@@ -60,7 +60,7 @@ const WeatherApp=()=>{
     }
 
     return(
-
+<section>
         <div className="container">
             <div className="top-bar">
                 <input type="text" className="cityInput" placeholder="search"/>
@@ -71,25 +71,26 @@ const WeatherApp=()=>{
             <div className="weather-image">
                 <img src={wicon} alt="" />
             </div>
-            <div className="weather-temp">24 °C</div>
-            <div className="weather-location">London</div>
+            <div className="weather-temp"></div>
+            <div className="weather-location"></div>
             <div className="data-container">
                 <div className="element">
                     <img src={humidity_icon} alt="" className="icon" />
                     <div className="data">
-                        <div className="humidity-percent">64%</div>
+                        <div className="humidity-percent"></div>
                         <div className="text">Humidity</div>
                     </div>
                 </div>
                 <div className="element">
                     <img src={wind_icon} alt="" className="icon" />
                     <div className="data">
-                        <div className="wind-rate">18 km/h</div>
+                        <div className="wind-rate"></div>
                         <div className="text">Wind Speed</div>
                     </div>
                 </div>
             </div>
         </div>
+        </section>
     )
 }
 
