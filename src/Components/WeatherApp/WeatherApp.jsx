@@ -63,7 +63,7 @@ const WeatherApp=()=>{
 <section>
         <div className="container">
             <div className="top-bar">
-                <input type="text" className="cityInput" placeholder="search"/>
+                <input type="text" className="cityInput" placeholder="search for city"/>
                 <div className="search-icon" onClick={()=>{search()}}>
                    <img src={search_icon} alt="" /> 
                 </div>
